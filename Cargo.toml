@@ -1,0 +1,16 @@
+[package]
+name = "dioxus-bootstrap"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "dioxus-bootstrap-demo"
+path = "src/bin/main.rs"
+
+[dependencies]
+dioxus = { git = "https://github.com/dioxuslabs/dioxus", features = ["web"] }
+fermi = { git = "https://github.com/dioxuslabs/fermi" }
+golde = { git = "https://github.com/mrxiaozhuox/golde.git" }
+
+[patch.crates-io]
+dioxus = { git = 'https://github.com/dioxuslabs/dioxus' }
