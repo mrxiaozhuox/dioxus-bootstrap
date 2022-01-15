@@ -13,6 +13,9 @@ pub mod prelude {
     pub use crate::style::*;
 
     pub use crate::components::card::*;
+    pub use crate::components::alert::*;
+    pub use crate::components::navbar::*;
     pub use crate::components::button::*;
+    pub use crate::components::dropdown::*;
 
 }

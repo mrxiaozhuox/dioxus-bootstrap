@@ -16,7 +16,7 @@ dioxus = { git = "https://github.com/dioxuslabs/dioxus", features = ["desktop", 
 
 [dependencies]
 fermi = { git = "https://github.com/dioxuslabs/fermi" }
-golde = { git = "https://github.com/mrxiaozhuox/golde.git" }
+golde = { git = "https://github.com/mrxiaozhuox/golde" }
 log = "0.4.6"
 
 [patch.crates-io]

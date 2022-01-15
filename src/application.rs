@@ -39,7 +39,8 @@ pub fn Application<'a>(cx: Scope<'a, ApplicationProps<'a>>) -> Element {
                 &cx.props.children,
             }
             script {[include_str!("./assets/jquery.min.js")]}
-            script {[include_str!("./assets/bootstrap.min.js")]}
+            script {[include_str!("./assets/bootstrap.bundle.min.js")]}
+            script {[include_str!("./assets/dioxus.event.js")]}
         }
     ))
 }
