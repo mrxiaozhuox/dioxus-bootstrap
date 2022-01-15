@@ -12,8 +12,20 @@ fn app(cx: Scope) -> Element {
 
     cx.render(rsx!{
         Application {
+            br {}
             Container {
-                // div { style: "width:100%;height:100px;background-color:red;" }
+                Card {
+                    header: cx.render(rsx!(
+                        h5 { "Featured" }
+                    )),
+                    CardTitle { text: "Special title treatment" },
+                    CardText { text: "With supporting text below as a natural lead-in to additional content." },
+                    a {
+                        href: "#",
+                        class: "btn btn-primary",
+                        "Hello World"
+                    }
+                }
             }
         }
     })
