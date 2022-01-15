@@ -8,6 +8,8 @@ fn main() {
 
 fn app(cx: Scope) -> Element {
 
+    wasm_logger::init(wasm_logger::Config::default());
+
     init_app(&cx);
 
     cx.render(rsx!{
@@ -15,15 +17,16 @@ fn app(cx: Scope) -> Element {
             br {}
             Container {
                 Card {
+                    border_color: PresetColor::Primary,
                     header: cx.render(rsx!(
                         h5 { "Featured" }
                     )),
                     CardTitle { text: "Special title treatment" },
                     CardText { text: "With supporting text below as a natural lead-in to additional content." },
-                    a {
-                        href: "#",
-                        class: "btn btn-primary",
-                        "Hello World"
+                    Link {
+                        background_color: PresetColor::Primary,
+                        text: "123",
+                        
                     }
                 }
             }

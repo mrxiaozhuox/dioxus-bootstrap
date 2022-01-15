@@ -19,10 +19,15 @@ pub struct ApplicationProps<'a> {
     children: Element<'a>,
 }
 
+pub const EXECUTE_TARGET: &'static str = "_dioxus_custom_event";
+
 pub fn Application<'a>(cx: Scope<'a, ApplicationProps<'a>>) -> Element {
 
     let triggers = trigger!(
-        bootstrap_modal => |_, _| { /**/ }
+        bootstrap_modal => |_, _| { /**/ },
+        _dioxus_custom_event => |code, res| {
+            log::info!("Code: {} Result: {:?}", code, res);
+        }
     );
 
     cx.render(rsx!(

@@ -4,9 +4,15 @@ pub mod application;
 pub mod layout;
 
 pub mod components;
+pub mod style;
 
 pub mod prelude {
-    pub use crate::application::Application;
-    pub use crate::layout::{Size, Container};
+    
+    pub use crate::application::*;
+    pub use crate::layout::{ Size, Container };
+    pub use crate::style::*;
+
     pub use crate::components::card::*;
+    pub use crate::components::button::*;
+
 }

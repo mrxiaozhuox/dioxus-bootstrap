@@ -6,6 +6,8 @@
 
 use dioxus::prelude::*;
 
+use crate::style::PresetColor;
+
 #[derive(Props)]
 pub struct CardProps<'a> {
 
@@ -22,24 +24,51 @@ pub struct CardProps<'a> {
     #[props(default)]
     native: Element<'a>,
 
+    #[props(default)]
+    background_color: PresetColor,
+    #[props(default)]
+    border_color: PresetColor,
+
     children: Element<'a>
 
 }
 
+///
+/// Bootstrap Component: Card
+/// 
+/// Props:
+/// - header                \[:optional\] set card-header content
+/// - fotter                \[:optional\] set card-footer content
+/// - style                 \[:optional\] set card div style
+/// - native                \[:optional\] custom all card internal structure
+/// - background_color      \[:optional\] set card bg-style <type: style::PresetColor>
+/// - border_color          \[:optional\] set card border-style <type: style::PresetColor>
+/// 
+/// 
 pub fn Card<'a>(cx: Scope<'a, CardProps<'a>>) -> Element {
     
+    let mut class_name = String::from("card");
+
+    if cx.props.background_color != PresetColor::Default {
+
+        let text_style = if cx.props.background_color.text_light() { "text-white" } else { "text-dark" };
+
+        class_name = format!("card {} bg-{}", text_style, cx.props.background_color.to_string());
+
+    } else if cx.props.border_color != PresetColor::Default {
+        class_name = format!("card border-{}", cx.props.border_color.to_string());
+    }
+
     // if the `native` is set, return the native card code
     if cx.props.native.is_some() {
         return cx.render(rsx!(
             div {
-                class: "card",
+                class: "{class_name}",
                 style: "{cx.props.style}",
                 &cx.props.native
             }
         ));
     }
-
-    let class_name = String::from("card");
     
     let mut header = None;
     if cx.props.header.is_some() {
