@@ -1,15 +1,15 @@
 //! Dioxus-Bootstrap
 //! YuKun Liu <mrxzx.info@gmai.com>
-//! 
+//!
 //! Component Layout
 //!  
 
 use dioxus::prelude::*;
 
 /// Dioxus-Bootstrap Layout::Size
-/// 
+///
 /// use for change the layout (or component) size.
-/// 
+///
 /// ```rust
 /// fn App(cx: Scope) {
 ///     cx.render(rsx!(
@@ -25,7 +25,6 @@ use dioxus::prelude::*;
 #[allow(dead_code)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Size {
-
     SM,
     MD,
     LG,
@@ -34,7 +33,6 @@ pub enum Size {
 
     Fluid,
     Default,
-
 }
 
 impl Size {
@@ -59,18 +57,15 @@ impl Default for Size {
 
 #[derive(Props)]
 pub struct ContainerProps<'a> {
-
     #[props(default)]
     size: Size,
 
-    children: Element<'a>
-
+    children: Element<'a>,
 }
 
 pub fn Container<'a>(cx: Scope<'a, ContainerProps<'a>>) -> Element {
-    
     let class_name = format!("container{}", cx.props.size.to_string());
-    
+
     cx.render(rsx!(
         div {
             class: "{class_name}",
@@ -81,16 +76,13 @@ pub fn Container<'a>(cx: Scope<'a, ContainerProps<'a>>) -> Element {
 
 #[derive(Props)]
 pub struct GridProps<'a> {
-
     #[props(default)]
     row_max_cols: u8,
 
-    children: Element<'a>
-
+    children: Element<'a>,
 }
 
 pub fn Grid<'a>(cx: Scope<'a, GridProps<'a>>) -> Element {
-
     let mut class_name = String::from("row");
 
     if cx.props.row_max_cols != 0 {
@@ -107,19 +99,16 @@ pub fn Grid<'a>(cx: Scope<'a, GridProps<'a>>) -> Element {
 
 #[derive(Props)]
 pub struct ColumnProps<'a> {
-
     #[props(default)]
     size: Size,
 
     #[props(default)]
     length: u8,
 
-    children: Element<'a>
-
+    children: Element<'a>,
 }
 
 pub fn Column<'a>(cx: Scope<'a, ColumnProps<'a>>) -> Element {
-    
     let mut class_name = String::from("col");
 
     if cx.props.size == Size::Default && cx.props.length != 0 {
@@ -134,5 +123,4 @@ pub fn Column<'a>(cx: Scope<'a, ColumnProps<'a>>) -> Element {
             &cx.props.children,
         }
     ))
-
 }

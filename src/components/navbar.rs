@@ -1,6 +1,6 @@
 //! Dioxus-Bootstrap
 //! YuKun Liu <mrxzx.info@gmai.com>
-//! 
+//!
 //! Component Navbar
 //!  
 
@@ -8,10 +8,8 @@ use dioxus::prelude::*;
 
 use crate::style::PresetColor;
 
-
 #[derive(Props)]
 pub struct NavbarProps<'a> {
-    
     #[props(default)]
     background_color: PresetColor,
 
@@ -21,18 +19,28 @@ pub struct NavbarProps<'a> {
     title: &'a str,
 
     children: Element<'a>,
-
 }
 
 pub fn Navbar<'a>(cx: Scope<'a, NavbarProps<'a>>) -> Element {
-    
     let mut class_name = String::from("navbar navbar-light bg-light");
     if cx.props.background_color != PresetColor::Default {
-        let text = if !cx.props.background_color.text_light() { "light" } else { "dark" };
-        class_name = format!("navbar navbar-{} bg-{}", text, cx.props.background_color.to_string());
+        let text = if !cx.props.background_color.text_light() {
+            "light"
+        } else {
+            "dark"
+        };
+        class_name = format!(
+            "navbar navbar-{} bg-{}",
+            text,
+            cx.props.background_color.to_string()
+        );
     }
-    
-    let container_name = if cx.props.container { "container" } else { "container-fluid" };
+
+    let container_name = if cx.props.container {
+        "container"
+    } else {
+        "container-fluid"
+    };
 
     cx.render(rsx!(
         div {
@@ -69,7 +77,6 @@ pub fn Navbar<'a>(cx: Scope<'a, NavbarProps<'a>>) -> Element {
 
 #[derive(Props)]
 pub struct NavItemProps<'a> {
-
     #[props(default)]
     active: bool,
 
@@ -82,12 +89,10 @@ pub struct NavItemProps<'a> {
     #[props(default)]
     native: Element<'a>,
 
-    text: &'a str
-
+    text: &'a str,
 }
 
 pub fn NavItem<'a>(cx: Scope<'a, NavItemProps<'a>>) -> Element {
-    
     if cx.props.native.is_some() {
         return cx.render(rsx!(
             li {
@@ -96,8 +101,12 @@ pub fn NavItem<'a>(cx: Scope<'a, NavItemProps<'a>>) -> Element {
             }
         ));
     }
-    
-    let href = if cx.props.href == "" { "#" } else { cx.props.href };
+
+    let href = if cx.props.href == "" {
+        "#"
+    } else {
+        cx.props.href
+    };
     let mut sub_class_name = String::from("nav-link");
     if cx.props.active {
         sub_class_name = String::from("nav-link active");
@@ -115,5 +124,29 @@ pub fn NavItem<'a>(cx: Scope<'a, NavItemProps<'a>>) -> Element {
             }
         }
     ))
+}
 
+#[derive(Props)]
+pub struct NavDropdownProps<'a> {
+    text: &'a str,
+
+    children: Element<'a>,
+}
+
+pub fn NavDropdown<'a>(cx: Scope<'a, NavDropdownProps<'a>>) -> Element {
+    let class_name = String::from("nav-link dropdown-toggle");
+
+    cx.render(rsx!(
+        div {
+            class: "nav-item dropdown",
+            a {
+                class: "{class_name}",
+                role: "button",
+                "data-bs-toggle": "dropdown",
+                "aria-expanded": "false",
+                "{cx.props.text}"
+            }
+            &cx.props.children,
+        }
+    ))
 }

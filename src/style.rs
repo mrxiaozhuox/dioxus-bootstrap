@@ -1,12 +1,11 @@
 //! Dioxus-Bootstrap
 //! YuKun Liu <mrxzx.info@gmai.com>
-//! 
+//!
 //! Style Enum
 //!  
 
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
 pub enum PresetColor {
-
     Primary,
     Secondary,
     Success,
@@ -19,7 +18,7 @@ pub enum PresetColor {
     Default,
 
     // link just can use in buttons
-    Link
+    Link,
 }
 
 impl ToString for PresetColor {
@@ -27,7 +26,7 @@ impl ToString for PresetColor {
         let str = match &self {
             PresetColor::Primary => "primary",
             PresetColor::Secondary => "secondary",
-            PresetColor::Success => "sucess",
+            PresetColor::Success => "success",
             PresetColor::Danger => "danger",
             PresetColor::Warning => "warning",
             PresetColor::Info => "info",
@@ -41,11 +40,12 @@ impl ToString for PresetColor {
 }
 
 impl Default for PresetColor {
-    fn default() -> Self { PresetColor::Default }
+    fn default() -> Self {
+        PresetColor::Default
+    }
 }
 
 impl PresetColor {
-
     pub fn text_light(&self) -> bool {
         match &self {
             PresetColor::Primary => true,
@@ -60,5 +60,4 @@ impl PresetColor {
             PresetColor::Link => false,
         }
     }
-
 }

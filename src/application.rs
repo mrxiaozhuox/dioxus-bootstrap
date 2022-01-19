@@ -1,10 +1,10 @@
 //! Dioxus-Bootstrap
 //! YuKun Liu <mrxzx.info@gmai.com>
-//! 
+//!
 //! Component Applcation
 //!  
 //! the basement component for `dioxus-boostrap`
-//! 
+//!
 
 use dioxus::prelude::*;
 use golde::*;
@@ -12,7 +12,6 @@ use golde::*;
 #[allow(dead_code)]
 #[derive(Props)]
 pub struct ApplicationProps<'a> {
-    
     #[props(default)]
     trigger: Trigger,
 
@@ -22,7 +21,6 @@ pub struct ApplicationProps<'a> {
 pub const EXECUTE_TARGET: &'static str = "_dioxus_custom_event";
 
 pub fn Application<'a>(cx: Scope<'a, ApplicationProps<'a>>) -> Element {
-
     let triggers = trigger!(
         bootstrap_modal => |_, _| { /**/ },
         _dioxus_custom_event => |code, res| {

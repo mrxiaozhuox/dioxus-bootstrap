@@ -1,5 +1,7 @@
-pub mod card;
-pub mod button;
 pub mod alert;
-pub mod navbar;
+pub mod badge;
+pub mod button;
+pub mod card;
 pub mod dropdown;
+pub mod modal;
+pub mod navbar;

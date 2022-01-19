@@ -1,6 +1,6 @@
 //! Dioxus-Bootstrap
 //! YuKun Liu <mrxzx.info@gmai.com>
-//! 
+//!
 //! Component Card
 //!  
 
@@ -10,8 +10,6 @@ use crate::style::PresetColor;
 
 #[derive(Props)]
 pub struct CardProps<'a> {
-
-
     #[props(default)]
     header: Element<'a>,
 
@@ -29,13 +27,12 @@ pub struct CardProps<'a> {
     #[props(default)]
     border_color: PresetColor,
 
-    children: Element<'a>
-
+    children: Element<'a>,
 }
 
 ///
 /// Bootstrap Component: Card
-/// 
+///
 /// Props:
 /// - header                \[:optional\] set card-header content
 /// - fotter                \[:optional\] set card-footer content
@@ -43,18 +40,23 @@ pub struct CardProps<'a> {
 /// - native                \[:optional\] custom all card internal structure
 /// - background_color      \[:optional\] set card bg-style <type: style::PresetColor>
 /// - border_color          \[:optional\] set card border-style <type: style::PresetColor>
-/// 
-/// 
+///
+///
 pub fn Card<'a>(cx: Scope<'a, CardProps<'a>>) -> Element {
-    
     let mut class_name = String::from("card");
 
     if cx.props.background_color != PresetColor::Default {
+        let text_style = if cx.props.background_color.text_light() {
+            "text-white"
+        } else {
+            "text-dark"
+        };
 
-        let text_style = if cx.props.background_color.text_light() { "text-white" } else { "text-dark" };
-
-        class_name = format!("card {} bg-{}", text_style, cx.props.background_color.to_string());
-
+        class_name = format!(
+            "card {} bg-{}",
+            text_style,
+            cx.props.background_color.to_string()
+        );
     } else if cx.props.border_color != PresetColor::Default {
         class_name = format!("card border-{}", cx.props.border_color.to_string());
     }
@@ -69,7 +71,7 @@ pub fn Card<'a>(cx: Scope<'a, CardProps<'a>>) -> Element {
             }
         ));
     }
-    
+
     let mut header = None;
     if cx.props.header.is_some() {
         header = cx.render(rsx!(
@@ -98,7 +100,7 @@ pub fn Card<'a>(cx: Scope<'a, CardProps<'a>>) -> Element {
             div {
                 class: "card-body",
                 style: "{cx.props.style}" ,
-                
+
                 div {
                     class: "card-body",
                     &cx.props.children
@@ -106,7 +108,7 @@ pub fn Card<'a>(cx: Scope<'a, CardProps<'a>>) -> Element {
             }
             footer,
         }
-    ))   
+    ))
 }
 
 #[inline_props]
