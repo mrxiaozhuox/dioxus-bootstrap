@@ -6,3 +6,4 @@ pub mod dropdown;
 pub mod modal;
 pub mod navbar;
 pub mod progress;
+pub mod list;

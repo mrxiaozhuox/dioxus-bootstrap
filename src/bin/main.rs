@@ -1,5 +1,5 @@
 use dioxus::prelude::*;
-use dioxus_bootstrap::{prelude::*, components::progress::Progress};
+use dioxus_bootstrap::{components::progress::Progress, prelude::*};
 use golde::*;
 
 fn main() {
@@ -8,10 +8,7 @@ fn main() {
 }
 
 fn app(cx: Scope) -> Element {
-    
-    init_app(&cx, |_initialized| {
-
-    });
+    init_app(&cx, |_initialized| {});
 
     cx.render(rsx!{
         Application {
@@ -183,6 +180,7 @@ fn app(cx: Scope) -> Element {
                     p { "Hello Wrold" }
                 }
             }
+            br {}
         }
     })
 }

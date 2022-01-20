@@ -21,16 +21,13 @@ pub struct ApplicationProps<'a> {
 pub const EXECUTE_TARGET: &'static str = "_dioxus_custom_event";
 
 pub fn Application<'a>(cx: Scope<'a, ApplicationProps<'a>>) -> Element {
-
-    let initialized =  cx.use_hook(|_| false);
+    let initialized = cx.use_hook(|_| false);
     exec_conditional(&cx, "window.dioxus_modal = {};".into(), !*initialized);
     if !*initialized {
-
         log::info!("INIT!!!");
 
         // call_once code.
         *initialized = true;
-    
     }
 
     let triggers = trigger!(

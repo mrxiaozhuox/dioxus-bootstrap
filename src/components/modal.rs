@@ -20,7 +20,6 @@ pub struct ModalProps<'a> {
 }
 
 pub fn Modal<'a>(cx: Scope<'a, ModalProps<'a>>) -> Element {
-
     let mut dialog_class = "modal-dialog modal-dialog-scrollable".to_string();
     if cx.props.centered {
         dialog_class = format!("{} modal-dialog-centered", dialog_class);
@@ -28,16 +27,17 @@ pub fn Modal<'a>(cx: Scope<'a, ModalProps<'a>>) -> Element {
 
     golde::use_once(&cx, || {
         golde::exec(
-            &cx, 
+            &cx,
             format!(
-                "window.dioxus_modal['{}'] = new bootstrap.Modal(document.getElementById('{}'), {{}});", 
-                cx.props.id, 
+                "if (typeof window.dioxus_modal !== Object) {{ window.dioxus_modal = {{}}; }};
+                window.dioxus_modal['{}'] = new bootstrap.Modal(document.getElementById('{}'), {{}});", 
+                cx.props.id,
                 cx.props.id,
             )
         );
     });
 
-    if cx.props.static_backdrop { 
+    if cx.props.static_backdrop {
         return cx.render(rsx!(
             div {
                 class: "modal fade",
@@ -46,7 +46,7 @@ pub fn Modal<'a>(cx: Scope<'a, ModalProps<'a>>) -> Element {
                 "data-bs-keyboard": "{cx.props.static_backdrop}",
                 "tabindex": "-1",
                 "aria-hidden": "true",
-    
+
                 div {
                     class: "{dialog_class}",
                     div {
@@ -56,7 +56,7 @@ pub fn Modal<'a>(cx: Scope<'a, ModalProps<'a>>) -> Element {
                 }
             }
         ));
-     } else {
+    } else {
         return cx.render(rsx!(
             div {
                 class: "modal fade",
@@ -64,7 +64,7 @@ pub fn Modal<'a>(cx: Scope<'a, ModalProps<'a>>) -> Element {
                 "data-bs-keyboard": "{cx.props.static_backdrop}",
                 "tabindex": "-1",
                 "aria-hidden": "true",
-    
+
                 div {
                     class: "{dialog_class}",
                     div {
@@ -74,7 +74,7 @@ pub fn Modal<'a>(cx: Scope<'a, ModalProps<'a>>) -> Element {
                 }
             }
         ));
-     };
+    };
 }
 
 #[inline_props]

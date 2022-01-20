@@ -10,7 +10,6 @@ use crate::style::PresetColor;
 
 #[derive(Props, PartialEq)]
 pub struct ProgressProps {
-    
     percentage: usize,
 
     #[props(default)]
@@ -24,17 +23,17 @@ pub struct ProgressProps {
 
     #[props(default)]
     animated: bool,
-
 }
 
 pub fn Progress(cx: Scope<ProgressProps>) -> Element {
-    
     let mut percentage = cx.props.percentage;
     while percentage > 100 {
         percentage -= 100;
     }
 
-    let color = if cx.props.color == PresetColor::Default { "primary".into() } else {
+    let color = if cx.props.color == PresetColor::Default {
+        "primary".into()
+    } else {
         cx.props.color.to_string()
     };
     let mut bar_class = format!("progress-bar bg-{}", color);
@@ -55,6 +54,6 @@ pub fn Progress(cx: Scope<ProgressProps>) -> Element {
                 style: "width: {percentage}%",
                 "{cx.props.text}",
             }
-        }  
+        }
     ))
 }

@@ -19,7 +19,7 @@ pub mod prelude {
     pub use crate::components::badge::*;
     pub use crate::components::button::*;
     pub use crate::components::card::*;
-    pub use crate::components::modal::*;
     pub use crate::components::dropdown::*;
+    pub use crate::components::modal::*;
     pub use crate::components::navbar::*;
 }
