@@ -5,9 +5,9 @@
 //!  
 
 use dioxus::core::Scope;
-use golde::execute;
+use golde::exec;
 
-use crate::{prelude::EXECUTE_TARGET, style::PresetColor};
+use crate::style::PresetColor;
 
 pub struct Script {}
 
@@ -21,6 +21,16 @@ impl Script {
             style.to_string()
         );
         log::info!("{}", cmd);
-        execute(&cx, EXECUTE_TARGET, cmd);
+        exec(&cx,cmd);
     }
+
+    pub fn modal<'a>(cx: &'a Scope, id: &'a str) -> () {
+        let cmd = format!(
+            "window.dioxus_modal['{}'].show();",
+            id
+        );
+        log::info!("{}", cmd);
+        exec(&cx, cmd);
+    }
+
 }

@@ -57,7 +57,7 @@ pub struct ButtonProps<'a> {
 pub fn Button<'a>(cx: Scope<'a, ButtonProps<'a>>) -> Element {
     let button_type = cx.props.button_type.to_string();
 
-    let mut class_name = String::from("btn");
+    let mut class_name = String::from("btn btn-primary");
     if cx.props.background_color != PresetColor::Default {
         class_name = format!("btn btn-{}", cx.props.background_color.to_string());
     } else if cx.props.border_color != PresetColor::Default {

@@ -8,7 +8,10 @@ fn main() {
 }
 
 fn app(cx: Scope) -> Element {
-    init_app(&cx);
+    
+    init_app(&cx, |_initialized| {
+
+    });
 
     cx.render(rsx!{
         Application {
@@ -114,10 +117,30 @@ fn app(cx: Scope) -> Element {
                         }
                     }
                 }
+                br {}
+                Card {
+                    div {
+                        Button {
+                            text: "Open Modal",
+                            onclick: move |_| {
+                                Script::modal(&cx, "testModal");
+                            }
+                        }
+                    }
+                }
             }
             Modal {
                 id: "testModal",
-                
+                static_backdrop: false,
+                ModalHeader {
+                    h5 {
+                        class: "modal-title",
+                        "Dioxus Modal",
+                    }
+                }
+                ModalBody {
+                    p { "Hello Wrold" }
+                }
             }
         }
     })
