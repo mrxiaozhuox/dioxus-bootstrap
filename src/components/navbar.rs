@@ -56,7 +56,7 @@ pub fn Navbar<'a>(cx: Scope<'a, NavbarProps<'a>>) -> Element {
                     class: "navbar-toggler",
                     r#type: "button",
                     "navbar-toggler": "collapse",
-                    "data-bs-target": "#navbar-navs",
+                    "data-bs-target": "#navbarNavs",
                     "aria-expanded": "false",
                     span {
                         class: "navbar-toggler-icon",
@@ -64,7 +64,7 @@ pub fn Navbar<'a>(cx: Scope<'a, NavbarProps<'a>>) -> Element {
                 }
                 div {
                     class: "collapse navbar-collapse",
-                    id: "navbar-navs",
+                    id: "navbarNavs",
                     ul {
                         class: "navbar-nav",
                         &cx.props.children

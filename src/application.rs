@@ -22,15 +22,16 @@ pub const EXECUTE_TARGET: &'static str = "_dioxus_custom_event";
 
 pub fn Application<'a>(cx: Scope<'a, ApplicationProps<'a>>) -> Element {
 
-    let initialized = use_state(&cx, || false);
-    if !*initialized.get() {
+    let initialized =  cx.use_hook(|_| false);
+    exec_conditional(&cx, "window.dioxus_modal = {};".into(), !*initialized);
+    if !*initialized {
+
+        log::info!("INIT!!!");
 
         // call_once code.
-        initialized.set(true);
+        *initialized = true;
     
     }
-    exec_conditional(&cx, "window.dioxus_modal = {};".into(), !*initialized.get());
-
 
     let triggers = trigger!(
         bootstrap_modal => |_, _| { /**/ },

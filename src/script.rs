@@ -4,8 +4,8 @@
 //! Script Manager
 //!  
 
-use dioxus::core::Scope;
-use golde::exec;
+use dioxus::core::{Scope, ScopeState};
+use golde::{exec, exec_conditional};
 
 use crate::style::PresetColor;
 
@@ -24,13 +24,44 @@ impl Script {
         exec(&cx,cmd);
     }
 
-    pub fn modal<'a>(cx: &'a Scope, id: &'a str) -> () {
+    pub fn modal<'a>(cx: &'a Scope, id: &'a str) -> ModalScript<'a> {
+
+        // exec(&cx, cmd);
+    
+        ModalScript {
+            cx,
+            id,
+        }
+
+    }
+
+}
+
+
+pub struct ModalScript<'a> {
+    cx: &'a ScopeState,
+    id: &'a str,
+}
+
+impl<'a> ModalScript<'a> {
+    
+    pub fn show(&mut self) {
         let cmd = format!(
             "window.dioxus_modal['{}'].show();",
-            id
+            self.id
         );
-        log::info!("{}", cmd);
-        exec(&cx, cmd);
+ 
+        exec(self.cx, cmd);
+    }
+
+    pub fn hide(&mut self) {
+
+        let cmd = format!(
+            "window.dioxus_modal['{}'].hide();",
+            self.id
+        );
+ 
+        exec(self.cx, cmd);
     }
 
 }

@@ -1,5 +1,5 @@
 use dioxus::prelude::*;
-use dioxus_bootstrap::prelude::*;
+use dioxus_bootstrap::{prelude::*, components::progress::Progress};
 use golde::*;
 
 fn main() {
@@ -56,6 +56,8 @@ fn app(cx: Scope) -> Element {
                 }
                 br {}
                 Card {
+                    h5 { "Alerts" }
+                    hr {}
                     div {
                         id: "alert-block",
                         Alert {
@@ -82,6 +84,8 @@ fn app(cx: Scope) -> Element {
                 }
                 br {}
                 Card {
+                    h5 { "Dropdown Tool" }
+                    hr {}
                     div {
                         class: "row row-cols-auto",
                         Column {
@@ -119,12 +123,49 @@ fn app(cx: Scope) -> Element {
                 }
                 br {}
                 Card {
+                    h5 { "Modal Dsiplay" }
+                    hr {}
                     div {
                         Button {
                             text: "Open Modal",
                             onclick: move |_| {
-                                Script::modal(&cx, "testModal");
+                                let mut my_modal = Script::modal(&cx, "testModal");
+                                my_modal.show();
                             }
+                        }
+                    }
+                }
+                br {}
+                Card {
+                    h5 { "Progress" }
+                    hr {}
+                    p {
+                        Progress {
+                            percentage: 25
+                        }
+                    }
+                    p {
+                        Progress {
+                            percentage: 50,
+                            text: "50%".to_string(),
+                            color: PresetColor::Success,
+                        }
+                    }
+                    p {
+                        Progress {
+                            percentage: 75,
+                            text: "75%".to_string(),
+                            color: PresetColor::Info,
+                            striped: true,
+                        }
+                    }
+                    p {
+                        Progress {
+                            percentage: 100,
+                            text: "100%".to_string(),
+                            color: PresetColor::Dark,
+                            striped: true,
+                            animated: true,
                         }
                     }
                 }
